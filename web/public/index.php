@@ -1,5 +1,5 @@
 <?php
-exit('WEB');
+
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
