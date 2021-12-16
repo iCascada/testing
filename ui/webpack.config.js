@@ -28,13 +28,16 @@ module.exports = {
     mode: 'development',
     devtool: 'inline-source-map',
     output: {
+        publicPath: '/',
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].[contenthash].js',
     },
     devServer: {
+        historyApiFallback: true,
         static: {
             directory: path.resolve(__dirname, 'dist'),
         },
+        hot: true,
         open: true,
         compress: true,
         port: 5555,

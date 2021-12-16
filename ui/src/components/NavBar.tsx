@@ -1,5 +1,5 @@
 import React from 'react'
-import { AppBar, Box, Button, IconButton, Toolbar } from '@mui/material'
+import {AppBar, Box, Button, IconButton, styled, Toolbar} from '@mui/material'
 import LightModeIcon from '@mui/icons-material/LightMode'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
 import { amber, blue } from '@mui/material/colors'
@@ -22,62 +22,36 @@ export const NavBar: React.FC<modeType> = ({ mode }) => {
       <AppBar position="static">
         <Toolbar
           variant="dense"
-          sx={{ justifyContent: 'space-between' }}
+          sx={{ justifyContent: 'end' }}
         >
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-          </IconButton>
-          <div>
+          <div id="nav-bar-wrapper">
             <NavLink to={Paths.LoginPage}>
-              <Button
-                sx={{
-                  color: mode === AvailableModes.MODE_LIGHT
-                    ? 'black'
-                    : 'white',
-                }}
-              >
+              <Button>
                 Войти
               </Button>
             </NavLink>
             <NavLink to={Paths.AuthPage}>
-              <Button
-                sx={{
-                  color: mode === AvailableModes.MODE_LIGHT
-                    ? 'black'
-                    : 'white',
-                }}
-              >
+              <Button>
                 Регистрация
               </Button>
             </NavLink>
             {mode === AvailableModes.MODE_LIGHT &&
-            <IconButton
-              onClick={(e: React.MouseEvent<HTMLButtonElement>) => toggleModeHandler(
-                e, AvailableModes.MODE_DARK)}
-              color="secondary"
-              component="span"
-            >
-                <LightModeIcon
-                  sx={{ color: amber[500] }}
-                />
-            </IconButton>
+              <IconButton
+                onClick={(e: React.MouseEvent<HTMLButtonElement>) => toggleModeHandler(
+                  e, AvailableModes.MODE_DARK)}
+                component="span"
+              >
+                  <LightModeIcon color="secondary" />
+              </IconButton>
             }
             {mode === AvailableModes.MODE_DARK &&
-            <IconButton
-              onClick={(e: React.MouseEvent<HTMLButtonElement>) => toggleModeHandler(
-                e, AvailableModes.MODE_LIGHT)}
-              color="secondary"
-              component="span"
-            >
-                <DarkModeIcon
-                  sx={{ color: blue[700] }}
-                />
-            </IconButton>
+              <IconButton
+                onClick={(e: React.MouseEvent<HTMLButtonElement>) => toggleModeHandler(
+                  e, AvailableModes.MODE_LIGHT)}
+                component="span"
+              >
+                  <DarkModeIcon color="secondary" />
+              </IconButton>
             }
           </div>
         </Toolbar>
