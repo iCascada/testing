@@ -1,5 +1,5 @@
-import { AvailableModes, ModeActions } from '../actions/modeActions'
-import { modeType } from '../types/storeTypes'
+import {AvailableModes, ModeActions} from '../actions/modeActions'
+import {modeType} from "../../types/appTypes"
 
 const mode = localStorage.getItem('mode') as AvailableModes
 

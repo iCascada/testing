@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Common\Packages\Http\Request;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Sanctum\Sanctum;
 
@@ -22,8 +23,6 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
-    {
-        //
+    public function boot() {
     }
 }

@@ -1,5 +1,7 @@
 export enum Paths {
   IndexPage = '/',
   LoginPage = '/login',
-  AuthPage = '/auth'
+  AuthPage = '/auth',
+  Dashboard = '/dashboard',
+  Panel = '/panel'
 }

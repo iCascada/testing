@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('USER_DB_CONNECTION', 'quiz_user'),
 
     /*
     |--------------------------------------------------------------------------
@@ -89,6 +89,22 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
+        ],
+
+        'quiz_user' => [
+            'driver' => 'mysql',
+            'host' => app()->runningInConsole()
+                ? env('USER_DB_HOST_CLI', '0.0.0.0:3306')
+                : env('USER_DB_HOST', 'quiz_user_db'),
+            'port' => env('USER_DB_PORT', '3306'),
+            'database' => env('USER_DB_DATABASE', 'forge'),
+            'username' => env('USER_DB_USERNAME', 'forge'),
+            'password' => env('USER_DB_PASSWORD', ''),
+            'unix_socket' => env('USER_DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix_indexes' => true,
+            'strict' => true,
         ],
 
     ],

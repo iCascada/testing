@@ -1,0 +1,13 @@
+{
+    "name": "cascada/common",
+    "authors": [
+        {
+            "name": "Victor",
+            "email": "iabrvictor@gmail.com"
+        }
+    ],
+    "require": {
+        "firebase/php-jwt": "^5.5",
+        "guzzlehttp/guzzle": "^7.4"
+    }
+}

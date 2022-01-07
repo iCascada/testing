@@ -5,12 +5,12 @@ export enum AvailableModes {
   MODE_DARK = 'MODE_DARK'
 }
 
-interface IModeDark extends Action {
+interface SetModeDark extends Action {
   type: AvailableModes.MODE_DARK
 }
 
-interface IModeLight extends Action{
+interface SetModeLight extends Action{
   type: AvailableModes.MODE_LIGHT
 }
 
-export type ModeActions = IModeDark | IModeLight
+export type ModeActions = SetModeDark | SetModeLight

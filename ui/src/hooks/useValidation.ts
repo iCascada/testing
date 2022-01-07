@@ -1,4 +1,5 @@
-import {emailPattern} from "../config/rfc";
+import {emailPattern} from "../config/settings";
+import {validationMessageMapper} from "../lang/rus"
 
 export interface ValidationRules {
     required?: boolean
@@ -6,6 +7,7 @@ export interface ValidationRules {
     max?: number
     likeField?: Record<string, string>
     pattern?: string
+    cyrillic?: boolean
 }
 
 interface ValidatorArgs extends ValidationRules {
@@ -37,53 +39,48 @@ export const useValidation = (data: FormData, rules: Array<BaseValidator>): Map<
 
     const required = (validatorArgs: ValidatorArgs): void => {
         const valid = validatorArgs.value.length !== 0
+        const message = validationMessageMapper(validatorArgs.field, 'required')
 
         if (!valid) {
-            addErrorMessage(
-                validatorArgs.field,
-                `Поле '${translate(validatorArgs.field)}' обязательно для заполнения`
-            )
+            addErrorMessage(validatorArgs.field, message)
         }
     }
 
     const pattern = (validatorArgs: ValidatorArgs): void => {
         const pattern = new RegExp(validatorArgs?.pattern as string)
         const valid = pattern.test(validatorArgs.value)
+        const message = validationMessageMapper(validatorArgs.field, 'pattern')
 
         if (!valid) {
-            addErrorMessage(
-                validatorArgs.field,
-                `Значение поля '${translate(validatorArgs.field)}' является недопустимым`
-            )
+            addErrorMessage(validatorArgs.field, message)
         }
     }
 
     const min = (validatorArgs: ValidatorArgs): void => {
         const valid = validatorArgs.value.length > validatorArgs.min!
-        let tale = ''
-
-        if (validatorArgs.min! % 10 === 1) {
-            tale = 'символа'
-        } else {
-            tale = 'символов'
-        }
+        const message = validationMessageMapper(validatorArgs.field, 'pattern', {min: validatorArgs.min})
 
         if (!valid) {
-            addErrorMessage(
-                validatorArgs.field,
-                `Длина поля '${translate(validatorArgs.field)}' должна быть не менее ${validatorArgs.min} ${tale}`
-            )
+            addErrorMessage(validatorArgs.field, message)
         }
     }
 
     const likeField = (validatorArgs: ValidatorArgs): void => {
         const valid = Object.values(validatorArgs.likeField as object)[0] === validatorArgs.value
+        const message = validationMessageMapper(validatorArgs.field, 'pattern', {likeField: validatorArgs.likeField})
 
         if (!valid) {
-            addErrorMessage(
-                validatorArgs.field,
-                `Поле '${translate(validatorArgs.field)}' должно совпадать c полем '${translate(Object.keys(validatorArgs.likeField as object)[0] as string)}'`
-            )
+            addErrorMessage(validatorArgs.field, message)
+        }
+    }
+
+    const cyrillic = (validatorArgs: ValidatorArgs): void => {
+        const regexp = /[а-яА-ЯёЁ]+/
+        const valid = regexp.test(validatorArgs.value)
+        const message = validationMessageMapper(validatorArgs.field, 'cyrillic')
+
+        if (!valid) {
+            addErrorMessage(validatorArgs.field, message)
         }
     }
 
@@ -92,6 +89,7 @@ export const useValidation = (data: FormData, rules: Array<BaseValidator>): Map<
         'pattern': pattern,
         'min': min,
         'likeField': likeField,
+        'cyrillic': cyrillic
     }
 
     const validate = (functionName: string, args?: ValidatorArgs): void => {
@@ -107,18 +105,6 @@ export const useValidation = (data: FormData, rules: Array<BaseValidator>): Map<
             result.set(field, message)
         }
     }
-
-    const translate = (field: fields): string => {
-        const fieldMapper: { [key in fields]: string } = {
-            email: 'Электронная почта',
-            password: 'Пароль',
-            confirmPassword: 'Подтверждение пароля',
-            department: 'Отдел'
-        }
-
-        return fieldMapper[field]
-    }
-
 
     rules.map(rule => {
         if (data.has(rule.field)) {
@@ -155,6 +141,12 @@ export const useValidation = (data: FormData, rules: Array<BaseValidator>): Map<
                             field: field,
                             value: data.get(field),
                             likeField: validatorRules[key],
+                        })
+                        break
+                    case "cyrillic":
+                        validate(key, {
+                            field: field,
+                            value: data.get(field),
                         })
                         break
                 }

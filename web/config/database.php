@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'migration'),
 
     /*
     |--------------------------------------------------------------------------
@@ -89,6 +89,66 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
+        ],
+
+        'migration' => [
+            'driver' => 'mysql',
+            'url' => env('MIGRATION_DATABASE_URL'),
+            'host' => env('MIGRATION_DB_HOST', '127.0.0.1'),
+            'port' => env('MIGRATION_DB_PORT', '3307'),
+            'database' => env('MIGRATION_DB_DATABASE', 'migration'),
+            'username' => env('MIGRATION_DB_USERNAME', 'root'),
+            'password' => env('MIGRATION_DB_PASSWORD', 'root'),
+            'unix_socket' => env('MIGRATION_DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+
+        'quiz_user' => [
+            'driver' => 'mysql',
+            'url' => env('USER_DATABASE_URL'),
+            'host' => env('USER_DB_HOST', '127.0.0.1'),
+            'port' => env('USER_DB_PORT', '3306'),
+            'database' => env('USER_DB_DATABASE', 'quiz_user'),
+            'username' => env('USER_DB_USERNAME', 'root'),
+            'password' => env('USER_DB_PASSWORD', 'root'),
+            'unix_socket' => env('USER_DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+
+        'quiz' => [
+            'driver' => 'mysql',
+            'url' => env('QUIZ_DATABASE_URL'),
+            'host' => env('QUIZ_DB_HOST', '127.0.0.1'),
+            'port' => env('QUIZ_DB_PORT', '3305'),
+            'database' => env('QUIZ_DB_DATABASE', 'quiz'),
+            'username' => env('QUIZ_DB_USERNAME', 'root'),
+            'password' => env('QUIZ_DB_PASSWORD', 'root'),
+            'unix_socket' => env('QUIZ_DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
         ],
 
     ],

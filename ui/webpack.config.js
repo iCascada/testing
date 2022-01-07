@@ -46,11 +46,11 @@ module.exports = {
         splitChunks: {
             chunks: 'all',
         },
-        minimize: true,
-        minimizer: [
-            new CssMinimizerPlugin(),
-            new TerserPlugin(),
-        ],
+        // minimize: true,
+        // minimizer: [
+        //     new CssMinimizerPlugin(),
+        //     new TerserPlugin(),
+        // ],
     },
     plugins: [
         new HtmlWebpackPlugin({

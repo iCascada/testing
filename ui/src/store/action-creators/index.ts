@@ -1,5 +1,9 @@
-import * as modeActionCreators from './mode'
+import {ModeActionCreators} from "./mode"
+import {AuthActionCreators} from "./auth"
+import {LoadingActionCreators} from "./loading"
 
-export default {
-  ...modeActionCreators
+export const allActionCreators = {
+  ...ModeActionCreators,
+  ...AuthActionCreators,
+  ...LoadingActionCreators
 }

@@ -27,6 +27,8 @@ RUN docker-php-ext-install gd
 # Install composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+RUN chown -R www-data:www-data /var/www/
+
 # Set working directory
 WORKDIR /var/www
 

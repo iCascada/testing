@@ -2,8 +2,15 @@
 
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
+use JetBrains\PhpStorm\NoReturn;
 
 define('LARAVEL_START', microtime(true));
+
+$helpers = dirname(__DIR__) . '/helpers/functions.php';
+
+if (file_exists($helpers)){
+    require_once $helpers;
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +39,7 @@ if (file_exists(__DIR__.'/../storage/framework/maintenance.php')) {
 */
 
 require __DIR__.'/../vendor/autoload.php';
+require __DIR__.'/../../common/vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------

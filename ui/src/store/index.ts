@@ -3,3 +3,5 @@ import { rootReducer } from './reducers/root'
 import thunk from 'redux-thunk'
 
 export const store = createStore(rootReducer, applyMiddleware(thunk))
+
+export type DispatchType = typeof store.dispatch

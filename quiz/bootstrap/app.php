@@ -52,4 +52,6 @@ $app->singleton(
 |
 */
 
+$app->useEnvironmentPath(dirname(__DIR__, 2) . '/common');
+
 return $app;
